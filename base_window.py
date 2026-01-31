@@ -1,3 +1,5 @@
+'''Базовый класс для создания окон для форм'''
+
 from tkinter import Toplevel
 import re
 
