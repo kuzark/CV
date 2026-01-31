@@ -1,10 +1,12 @@
+'''Использовал модифицированный мною паттерн «Наблюдатель» для последовательного изменения или добавления данных (текущая дата, данные врача и т. д.) в текст медицинского документа.'''
+
 from handlers import TextHandler
 from .random_vitals import RandomVitals
 from .head_changers import WeekChanger, TitleChanger
 from .treatment_changer import TreatmentChanger
 from .signature import Signature
 
-class DnevnicChanger:
+class MedDocChanger:
     def __init__(self, app):
         # Экземпляр приложения
         self.app = app
@@ -21,27 +23,27 @@ class DnevnicChanger:
     
     def get(self):
         '''Получение текста дневника из текстового поля'''
-        self.dnevnic = self.app.text.get('1.0', 'end')
+        self.meddoc = self.app.text.get('1.0', 'end')
 
 
     def rebuild(self):
         '''Изменение дневника'''
         # Исходный дневник отправлен в лог для сравнения
-        self.app.logger.info('\nИсходный дневник:\n%s', self.dnevnic)
+        self.app.logger.info('\nИсходный дневник:\n%s', self.meddoc)
         # Запуск цикла методов для изменения
         for method in self.changers:
             # Запись дневника до изменения методом
-            previous_dnevnic = self.dnevnic
+            previous_meddoc = self.meddoc
             report = 'Дневник не изменен.'
             try:
-                self.dnevnic = method(self.dnevnic)
+                self.meddoc = method(self.meddoc)
             except Exception as err:
                 self.app.logger.error(f'Неизвестная ошибка: {err}')
                 break
             else:
                 # Если дневник изменен в лог уходит текст дневника
-                if self.dnevnic != previous_dnevnic:
-                    report = self.dnevnic
+                if self.meddoc != previous_meddoc:
+                    report = self.meddoc
                 # Запись измененного дневника в лог
                 self.app.logger.info(
                     '\nМетод: %s\n%s',
@@ -53,7 +55,7 @@ class DnevnicChanger:
     def publish(self):
         '''Вставка дневника в текстовое поле'''
         self.app.text.delete('1.0', 'end')
-        self.app.text.insert('1.0', self.dnevnic)
+        self.app.text.insert('1.0', self.meddoc)
         self.app.text.tag_add('main' ,'1.0', 'end')
         self.app.text.tag_add('title' ,'1.0', '2.0')
 
@@ -64,10 +66,10 @@ class DnevnicChanger:
         self.text_handler.paragraphs_selector()
 
 
-def dnevnic_rebuilder(app):
+def meddoc_rebuilder(app):
     '''Функция для изменения дневника'''
     # Инициализация классов
-    rebuilder = DnevnicChanger(app)
+    rebuilder = MedDocChanger(app)
     random_vitals = RandomVitals(app)
     week_changer = WeekChanger(app)
     title_changer = TitleChanger(app)
