@@ -1,3 +1,5 @@
+'''Класс для загрузки CSV-файла, выгруженного непосредственно с анализатора крови, и преобразования в датафрейм'''
+
 import pandas as pd
 from tkinter.messagebox import showerror
 from tkinter.filedialog import askopenfilename
