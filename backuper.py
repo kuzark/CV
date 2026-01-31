@@ -1,3 +1,5 @@
+'''Реализовано резервное копирование файла базы данных на сетевой папке и локальном компьютере'''
+
 from datetime import datetime, timedelta
 from pathlib import Path
 import shutil
