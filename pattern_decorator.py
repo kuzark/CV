@@ -50,12 +50,3 @@ def _check_updates(self):
         except Exception:
             return False
         
-    # Проверка успешности выполнения
-    if not update_app():
-        # Удаление главного окна и завершение цикла
-        self.destroy()
-        self.quit()
-    else:
-        # Показать главное окно приложения
-        self.deiconify()
-        return True
