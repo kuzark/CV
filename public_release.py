@@ -1,3 +1,4 @@
+'''Публикация новых сборок автоматизирована через GitHub CLI.'''
 '''Модуль для публикации релиза'''
 import subprocess
 from datetime import datetime
