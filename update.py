@@ -1,3 +1,5 @@
+'''Для обновления приложений на всех компьютерах использую публичный репозиторий на GitHub без кода приложения, приложение автоматически проверяет наличие свежей сборки в репозитории при запуске.'''
+
 import requests
 from tkinter.messagebox import showerror, showinfo
 from webbrowser import open_new_tab
@@ -32,7 +34,7 @@ class UpdateApp:
             data = response.json()
             return data['tag_name'], data['assets'][0]['browser_download_url']
         except requests.RequestException as err:
-            # При возниконовении ошибки вывод окна с ошибкой
+            # При возникновении ошибки вывод окна с ошибкой
             err_msg = f'Ошибка! Код: {err}'
             showerror(title='Ошибка', message=err_msg)
             raise Exception
