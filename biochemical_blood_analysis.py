@@ -1,3 +1,5 @@
+'''Класс для генерации заключения по значениям показателей биохимического анализа крови'''
+
 from math import floor
 
 class BiochemicalBloodAnalysis:
