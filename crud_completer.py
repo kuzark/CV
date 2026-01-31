@@ -1,3 +1,5 @@
+'''Класс для работы с базой данных'''
+
 from tkinter.messagebox import showerror, showinfo, askyesno
 from sqlalchemy.orm import sessionmaker
 
