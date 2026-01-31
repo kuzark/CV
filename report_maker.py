@@ -1,3 +1,5 @@
+'''Пример формирования отчета по пациентам из базы данных.'''
+
 from openpyxl import load_workbook
 from openpyxl.styles import Border, Side, Alignment, Font
 from tkinter.messagebox import showerror, showinfo
