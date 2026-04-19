@@ -100,8 +100,8 @@ class Treatments:
             'course': f'Курс лечения - {course} недель. ',
             'name': (
                 f'{scheme['name']}{self._ribavirin['name']}'
-                if rib else scheme['name'],
-            )
+                if rib else scheme['name']
+            ),
         }
         
 
